@@ -1,5 +1,7 @@
 import 'package:devprompt/src/core/injections/service_locator.dart';
+import 'package:devprompt/src/core/routing/app_router.dart';
 import 'package:devprompt/src/core/theme/app_theme.dart';
+import 'package:devprompt/src/features/promptchat/presentation/bloc/promptchat_bloc.dart';
 import 'package:devprompt/src/features/welcome/presentation/boc/welcome_bloc.dart';
 import 'package:devprompt/src/features/welcome/presentation/pages/welcome_page.dart';
 import 'package:devprompt/src/features/welcome/welcome_injection.dart';
@@ -7,7 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   init();
@@ -19,23 +21,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WelcomeBloc>(
-       create: (context) => sl<WelcomeBloc>(),
-      child: MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<WelcomeBloc>(create: (context) => sl<WelcomeBloc>()),
+        BlocProvider<PromptchatBloc>(create: (context) => sl<PromptchatBloc>()),
+      ],
+      child: MaterialApp.router(
         title: 'Dev Prompt',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        home: const MyHomePage(title: 'Dev Prompt'),
+        routerConfig: goRouter,
       ),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
-  final String title;
+  static const String pageName = '/';
 
   @override
   Widget build(BuildContext context) {

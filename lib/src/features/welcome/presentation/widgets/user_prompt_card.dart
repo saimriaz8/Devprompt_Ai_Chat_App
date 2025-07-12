@@ -29,7 +29,7 @@ class UserPromptCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+        borderRadius: BorderRadius.all(Radius.circular(20))
       ),
       child: Row(
         children: [

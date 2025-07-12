@@ -13,5 +13,5 @@ void initWelcomeInjections() {
   sl.registerLazySingleton<SignInWithGoogleUsecase>(
     () => SignInWithGoogleUsecase(sl()),
   );
-  sl.registerFactory<WelcomeBloc>(() => WelcomeBloc());
+  sl.registerFactory<WelcomeBloc>(() => WelcomeBloc(sl()));
 }
