@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 abstract class AiPromptRemoteDatasource {
   Future<String> askMestralAi(String prompt);
@@ -11,8 +12,8 @@ class AiPromptRemoteDatasourceImplementation extends AiPromptRemoteDatasource {
   @override
   Future<String> askMestralAi(String prompt) async {
     const String baseUrl = 'https://openrouter.ai/api/v1/chat/completions';
-    const String apiKey =
-        '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';
+    final apiKey =
+        dotenv.env['OPEN_ROUTER_API_KEY'];
     try {
       final response = await dio.post(
         baseUrl,
