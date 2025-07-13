@@ -2,6 +2,7 @@ import 'package:devprompt/src/core/injections/service_locator.dart';
 import 'package:devprompt/src/core/routing/app_router.dart';
 import 'package:devprompt/src/core/theme/app_theme.dart';
 import 'package:devprompt/src/features/promptchat/presentation/bloc/promptchat_bloc.dart';
+import 'package:devprompt/src/features/settings/presentation/settings_bloc.dart';
 import 'package:devprompt/src/features/welcome/presentation/boc/welcome_bloc.dart';
 import 'package:devprompt/src/features/welcome/presentation/pages/welcome_page.dart';
 import 'package:devprompt/src/features/welcome/welcome_injection.dart';
@@ -27,13 +28,23 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<WelcomeBloc>(create: (context) => sl<WelcomeBloc>()),
         BlocProvider<PromptchatBloc>(create: (context) => sl<PromptchatBloc>()),
+        BlocProvider<SettingsBloc>(create: (context) => sl<SettingsBloc>()),
       ],
-      child: MaterialApp.router(
-        title: 'Dev Prompt',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        routerConfig: goRouter,
+      child: Builder(
+        builder: (context) {
+          final isLight =
+              context.watch<SettingsBloc>().state is SettingsLightModeState;
+          return MaterialApp.router(
+            title: 'Dev Prompt',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode:
+                isLight
+                    ? ThemeMode.light
+                    : ThemeMode.dark,
+            routerConfig: goRouter,
+          );
+        },
       ),
     );
   }

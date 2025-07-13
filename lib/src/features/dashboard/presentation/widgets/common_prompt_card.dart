@@ -15,6 +15,7 @@ class CommonPromptCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    // final isDark = Theme.of(context).brightness ==Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -42,6 +43,7 @@ class CommonPromptCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: size.height * 0.022,
                 fontWeight: FontWeight.bold,
+                color:  Colors.black
               ),
             ),
             const SizedBox(height: 6),

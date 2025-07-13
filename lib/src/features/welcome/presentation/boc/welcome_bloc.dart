@@ -22,6 +22,10 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         emit(WelcomeFailureState(e.toString()));
       }
     });
+
+    on<ResetStateEvent>((event, emit) {
+      emit(WelcomeInitialState());
+    });
   }
 
 }

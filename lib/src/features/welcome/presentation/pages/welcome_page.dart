@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class WelcomePage extends StatelessWidget {
+  static const String pageName = '/welcomepage';
   const WelcomePage({super.key});
 
   @override
@@ -37,9 +38,7 @@ class WelcomePage extends StatelessWidget {
                   width: width,
                   isLoadingState: true,
                 ),
-                WelcomeSuccessState(user: _) => Center(
-                  child: SizedBox(),
-                ),
+                WelcomeSuccessState(user: _) => Center(child: SizedBox()),
                 WelcomeFailureState(message: var message) => Center(
                   child: Text(message.toString()),
                 ),

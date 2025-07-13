@@ -5,3 +5,6 @@ abstract class WelcomeEvent {}
 
 @immutable
 class SignInWithGoogleEvent extends WelcomeEvent {}
+
+@immutable
+class ResetStateEvent extends WelcomeEvent {}

@@ -18,7 +18,7 @@ class PromptchatHeader extends StatelessWidget {
       width: width,
       height: height * 0.2,
       decoration: BoxDecoration(
-        color: AppColors.darkThemeBackgroundColor,
+        color: isDark ? Colors.white : AppColors.darkThemeBackgroundColor,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(30),
           bottomRight: Radius.circular(30),

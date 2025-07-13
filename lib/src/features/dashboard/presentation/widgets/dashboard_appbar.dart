@@ -1,6 +1,8 @@
+import 'package:devprompt/src/features/settings/presentation/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:devprompt/src/core/theme/app_colors.dart';
+import 'package:go_router/go_router.dart';
 
 class DashboardAppbar extends StatelessWidget {
   final double width;
@@ -27,7 +29,10 @@ class DashboardAppbar extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: isDark ? Colors.black.withOpacity(0.3) : Colors.grey.withOpacity(0.1),
+            color:
+                isDark
+                    ? Colors.black.withOpacity(0.3)
+                    : Colors.grey.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(2, 4),
           ),
@@ -78,7 +83,7 @@ class DashboardAppbar extends StatelessWidget {
           /// ⚙️ Settings Icon with AI/dev style
           IconButton(
             onPressed: () {
-              // Navigate to settings page or show bottom sheet
+              GoRouter.of(context).push(DevPromptSettingsPage.pageName, extra: user);
             },
             icon: const Icon(Icons.settings_suggest_outlined),
             tooltip: 'Settings',

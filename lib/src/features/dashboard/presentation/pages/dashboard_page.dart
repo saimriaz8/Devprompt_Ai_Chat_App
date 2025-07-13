@@ -3,9 +3,11 @@ import 'package:devprompt/src/features/dashboard/presentation/widgets/common_pro
 import 'package:devprompt/src/features/dashboard/presentation/widgets/dashboard_appbar.dart';
 import 'package:devprompt/src/features/dashboard/presentation/widgets/empty_saved_chat_widget.dart';
 import 'package:devprompt/src/features/dashboard/presentation/widgets/start_chat_widget.dart';
+import 'package:devprompt/src/features/promptchat/presentation/bloc/promptchat_bloc.dart';
 import 'package:devprompt/src/features/promptchat/presentation/pages/promptchat_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -57,18 +59,18 @@ class _DashboardPageState extends State<DashboardPage>
     ).animate(
       CurvedAnimation(parent: _animationController, curve: Interval(0.75, 1.0)),
     );
-
-    _animationController.forward(from: 0);
   }
 
   @override
   void dispose() {
-    super.dispose();
     _animationController.dispose();
+    super.dispose();
+    
   }
 
   @override
   Widget build(BuildContext context) {
+    _animationController.forward(from: 0);
     final size = MediaQuery.sizeOf(context);
     final Size(:width, :height) = size;
     return SafeArea(
@@ -190,7 +192,18 @@ class _DashboardPageState extends State<DashboardPage>
                               title: prompt['title'] ?? 'Title not fount',
                               description:
                                   prompt['desc'] ?? 'Description not found',
-                              onTap: () {},
+                              onTap: () {
+                                GoRouter.of(
+                                  context,
+                                ).push(PromptchatPage.pageName);
+                                context.read<PromptchatBloc>().add(
+                                  SendPromptEvent(
+                                    prompt:
+                                        prompt['title'] ??
+                                        'Something went wrong',
+                                  ),
+                                );
+                              },
                             );
                           },
                           separatorBuilder:

@@ -1,18 +1,18 @@
 final List<Map<String, String>> commonPrompts = [
   {
-    "title": "Fix my Dart code",
-    "desc": "Paste code and get quick help.",
+    "title": "Explain Big-O notation",
+    "desc": "Describe time/space complexity of algorithms.",
   },
   {
-    "title": "Explain a Flutter widget",
-    "desc": "Understand any widget in simple words.",
+    "title": "How memory allocation works",
+    "desc": "OS or C/C++ level explanation",
   },
   {
-    "title": "Suggest UI Ideas",
-    "desc": "Get creative Flutter UI design ideas.",
+    "title": "Clean Architecture example",
+    "desc": "Ask for a feature in Clean Architecture style",
   },
   {
-    "title": "Optimize my function",
-    "desc": "Improve logic and performance.",
+    "title": "Search/Sort Algorithms",
+    "desc": "Request code or explanation of searching/sorting",
   },
 ];
