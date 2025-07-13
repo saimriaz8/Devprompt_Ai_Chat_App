@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
             title: 'Dev Prompt',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
+            debugShowCheckedModeBanner: false,
             themeMode:
                 isLight
                     ? ThemeMode.light

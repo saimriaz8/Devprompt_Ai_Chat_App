@@ -47,6 +47,8 @@ dependencies:
   bloc_test: ^10.0.0
   bloc: ^9.0.0
   flutter_dotenv: ^5.2.1
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
@@ -101,3 +103,18 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/dev_prompt_ai.png"
+
+flutter_native_splash:
+  color: "#171810"
+  image: assets/images/dev_prompt_splash.png
+  android: true
+  ios: true
+  fullscreen: true
+
+  android_12:
+    icon_background_color: "#171810"
+    image: assets/images/dev_prompt_splash.png

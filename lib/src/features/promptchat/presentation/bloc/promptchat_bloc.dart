@@ -7,7 +7,7 @@ part 'promptchat_state.dart';
 
 class PromptchatBloc extends Bloc<PromptchatEvent, PromptchatState> {
   final AiPromptResponseUsecase aiPromptResponseUsecase;
-  final List<Map<String, String>> _chatHistory = [];
+  List<Map<String, String>> _chatHistory = [];
   PromptchatBloc(this.aiPromptResponseUsecase)
     : super(PromptchatInitialState()) {
     on<SendPromptEvent>((event, emit) async {
@@ -21,6 +21,15 @@ class PromptchatBloc extends Bloc<PromptchatEvent, PromptchatState> {
         _chatHistory.add({'ai': e.toString()});
         emit(PromptchatFailureState(List.from(_chatHistory)));
       }
+    });
+
+    on<SavedChatEvent>((event, emit) async {
+      emit(PromptchatLoadedState(event.chatHistory));
+    });
+
+    on<ResetPromptChatState>((event, emit) async {
+      _chatHistory = [];
+      emit(PromptchatInitialState());
     });
   }
 }

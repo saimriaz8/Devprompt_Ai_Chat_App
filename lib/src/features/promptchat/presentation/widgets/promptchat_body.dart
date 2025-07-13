@@ -43,7 +43,7 @@ class PromptchatBody extends StatelessWidget {
                     child: child,
                   ),
                 ),
-            child: PromptchatHeader(height: height, width: width),
+            child: PromptchatHeader(height: height, width: width, chatHistory: chatHistory,),
           ),
           Expanded(
             child: AnimatedBuilder(
@@ -63,12 +63,14 @@ class PromptchatBody extends StatelessWidget {
                 child: Column(
                   children: [
                     if (chatHistory.isEmpty)
-                      Center(
-                        child: Text(
-                          'Where should we begin',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'Where should we begin',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

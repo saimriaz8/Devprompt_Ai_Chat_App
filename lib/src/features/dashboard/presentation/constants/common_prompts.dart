@@ -16,3 +16,5 @@ final List<Map<String, String>> commonPrompts = [
     "desc": "Request code or explanation of searching/sorting",
   },
 ];
+
+List<Map<String, dynamic>> savedChats = [];

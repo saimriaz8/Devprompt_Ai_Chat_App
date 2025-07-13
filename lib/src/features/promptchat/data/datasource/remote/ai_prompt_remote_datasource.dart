@@ -11,45 +11,53 @@ class AiPromptRemoteDatasourceImplementation extends AiPromptRemoteDatasource {
 
   @override
   Future<String> askMestralAi(String prompt) async {
-    const String baseUrl = 'https://openrouter.ai/api/v1/chat/completions';
-    final apiKey =
-        dotenv.env['OPEN_ROUTER_API_KEY'];
-    try {
-      final response = await dio.post(
-        baseUrl,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $apiKey',
-            'Content-Type': 'application/json',
-            'HTTP-Referer': 'https://devprompt.flutter',
-            'X-Title': 'Devprompt AI Chat',
-          },
-        ),
-        data: {
-          "model": "mistralai/mistral-7b-instruct",
-          "messages": [
-            {
-              "role": "system",
-              "content":
-                  "You are a helpful and knowledgeable AI assistant strictly specialized in software development, computer science, and related technical fields. You assist with programming, frameworks, debugging, algorithms, system design, dev tools, and other developer-related queries. Politely decline to answer questions outside of this scope, such as topics related to health, finance, politics, or personal matters.",
-            },
-            {"role": "user", "content": prompt},
-          ],
-          "max_tokens": 200,
+  const String baseUrl = 'https://openrouter.ai/api/v1/chat/completions';
+  final apiKey = dotenv.env['OPEN_ROUTER_API_KEY'];
+
+  try {
+    final response = await dio.post(
+      baseUrl,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $apiKey',
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://devprompt.flutter', // must be a valid URL format
+          'X-Title': 'Devprompt AI Chat',
         },
-      );
+      ),
+      data: {
+        "model": "mistralai/mixtral-8x7b-instruct",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a helpful AI assistant that writes clean code and explains it well.",
+          },
+          {
+            "role": "user",
+            "content": prompt,
+          }
+        ],
+        "max_tokens": 512,
+        "temperature": 0.2,
+      },
+    );
 
-      final data = response.data;
+    final data = response.data;
 
-      if (data != null &&
-          data['choices'] != null &&
-          data['choices'].toString().isNotEmpty) {
-        return data['choices'][0]['message']['content'].toString().trim();
-      } else {
-        return 'Something went wrong';
-      }
-    } catch (e) {
-      return e.toString();
+    if (data != null &&
+        data['choices'] != null &&
+        data['choices'].toString().isNotEmpty) {
+      return data['choices'][0]['message']['content'].toString().trim();
+    } else {
+      return 'Something went wrong';
     }
+  } catch (e) {
+    if (e is DioError) {
+      print("Dio error response: ${e.response?.data}");
+      return e.response?.data.toString() ?? "Unknown Dio error";
+    }
+    return e.toString();
   }
+}
+
 }

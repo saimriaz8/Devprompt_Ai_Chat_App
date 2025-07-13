@@ -1,14 +1,19 @@
 import 'package:devprompt/src/core/theme/app_colors.dart';
+import 'package:devprompt/src/features/dashboard/presentation/constants/common_prompts.dart';
+import 'package:devprompt/src/features/promptchat/presentation/bloc/promptchat_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class PromptchatHeader extends StatelessWidget {
   final double width;
   final double height;
+  final List<Map<String, dynamic>> chatHistory;
   const PromptchatHeader({
     super.key,
     required this.height,
     required this.width,
+    required this.chatHistory,
   });
 
   @override
@@ -42,6 +47,7 @@ class PromptchatHeader extends StatelessWidget {
                     await Future.delayed(Duration(milliseconds: 600));
                     // ignore: use_build_context_synchronously
                     GoRouter.of(context).pop();
+                    context.read<PromptchatBloc>().add(ResetPromptChatState());
                   },
                   icon: const Icon(Icons.keyboard_double_arrow_left),
                   tooltip: 'Back',
@@ -62,10 +68,23 @@ class PromptchatHeader extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    // Navigate to settings page or show bottom sheet
+                    if (chatHistory.isNotEmpty) {
+                      savedChats.add({
+                        'title': chatHistory[0]['user'],
+                        'subTitle': chatHistory[1]['ai'],
+                        'chatHistory': chatHistory,
+                      });
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text('Prompt saved')));
+                    } else {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text('Chat are empty')));
+                    }
                   },
-                  icon: const Icon(Icons.edit_note),
-                  tooltip: 'Edit Note',
+                  icon: const Icon(Icons.bookmark),
+                  tooltip: 'Save',
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(
                       AppColors.primaryColor,

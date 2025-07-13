@@ -2,6 +2,7 @@ import 'package:devprompt/src/features/dashboard/presentation/constants/common_p
 import 'package:devprompt/src/features/dashboard/presentation/widgets/common_prompt_card.dart';
 import 'package:devprompt/src/features/dashboard/presentation/widgets/dashboard_appbar.dart';
 import 'package:devprompt/src/features/dashboard/presentation/widgets/empty_saved_chat_widget.dart';
+import 'package:devprompt/src/features/dashboard/presentation/widgets/saved_chat_tile.dart';
 import 'package:devprompt/src/features/dashboard/presentation/widgets/start_chat_widget.dart';
 import 'package:devprompt/src/features/promptchat/presentation/bloc/promptchat_bloc.dart';
 import 'package:devprompt/src/features/promptchat/presentation/pages/promptchat_page.dart';
@@ -32,7 +33,7 @@ class _DashboardPageState extends State<DashboardPage>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1600),
+      duration: Duration(milliseconds: 1100),
     );
 
     appBarSlideAnimation = Tween<Offset>(
@@ -65,7 +66,6 @@ class _DashboardPageState extends State<DashboardPage>
   void dispose() {
     _animationController.dispose();
     super.dispose();
-    
   }
 
   @override
@@ -148,7 +148,35 @@ class _DashboardPageState extends State<DashboardPage>
                       SizedBox(
                         height: 5,
                       ), // SavedChatTile(   title: 'Hello', subtitle: 'Here i am')
-                      EmptySavedChatsWidget(),
+                      savedChats.isEmpty
+                          ? EmptySavedChatsWidget()
+                          : SizedBox(
+                            width: width * 0.9,
+                            height: height * 0.22,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: savedChats.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    GoRouter.of(
+                                      context,
+                                    ).push(PromptchatPage.pageName);
+                                    context.read<PromptchatBloc>().add(
+                                      SavedChatEvent(
+                                        chatHistory:
+                                            savedChats[index]['chatHistory'],
+                                      ),
+                                    );
+                                  },
+                                  child: SavedChatTile(
+                                    title: savedChats[index]['title'],
+                                    subtitle: savedChats[index]['subTitle'],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                     ],
                   ),
                 ),
