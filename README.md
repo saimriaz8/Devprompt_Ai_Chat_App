@@ -1,16 +1,43 @@
-# devprompt
+# 💬 DevPrompt – AI Chat App for Developers
 
-A new Flutter project.
+**DevPrompt** is an open-source AI-powered chat application built with Flutter. It features a clean, modern UI, and uses a specialized AI assistant that only answers questions related to **software development and computer science**.
 
-## Getting Started
+> ⚡️ Built with Clean Architecture • BLoC State Management • Firebase • OpenRouter AI • Flutter Animations
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🔐 **Firebase Authentication** – Secure login & logout
+- 🧠 **OpenRouter AI Integration** – Answers programming, debugging, system design, and dev tool queries
+- 🧱 **BLoC State Management** – Scalable and testable app structure
+- 🎯 **Clean Architecture** – Feature separation for maintainability
+- ✨ **Smooth UI/UX** – Custom transitions and animations
+- 🌙 **Dark/Light Theme Support**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📸 Video
+
+Coming soon...
+
+---
+
+## 🧰 Tech Stack
+
+- **Flutter** – UI framework
+- **Firebase** – Auth backend
+- **OpenRouter API** – AI completions (Mistral-based model)
+- **BLoC** – Business logic layer
+- **Flutter Animations** – For page transitions and effects
+- **GetIt** – Dependency injection
+
+---
+
+## 📦 Installation
+
+1. **Clone the repo:**
+
+   ```bash
+   git clone https://github.com/saimriaz8/DevPrompt.git
+   cd DevPrompt
