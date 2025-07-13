@@ -2,7 +2,7 @@ import 'package:devprompt/src/core/injections/service_locator.dart';
 import 'package:devprompt/src/core/routing/app_router.dart';
 import 'package:devprompt/src/core/theme/app_theme.dart';
 import 'package:devprompt/src/features/promptchat/presentation/bloc/promptchat_bloc.dart';
-import 'package:devprompt/src/features/settings/presentation/settings_bloc.dart';
+import 'package:devprompt/src/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:devprompt/src/features/welcome/presentation/boc/welcome_bloc.dart';
 import 'package:devprompt/src/features/welcome/presentation/pages/welcome_page.dart';
 import 'package:devprompt/src/features/welcome/welcome_injection.dart';

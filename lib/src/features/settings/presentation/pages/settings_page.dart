@@ -1,7 +1,7 @@
 import 'package:devprompt/main.dart';
 import 'package:devprompt/src/core/theme/app_colors.dart';
 import 'package:devprompt/src/features/settings/auth/domain/settings_auth_usecase.dart';
-import 'package:devprompt/src/features/settings/presentation/settings_bloc.dart';
+import 'package:devprompt/src/features/settings/presentation/bloc/settings_bloc.dart';
 import 'package:devprompt/src/features/welcome/presentation/boc/welcome_bloc.dart';
 import 'package:devprompt/src/features/welcome/welcome_injection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
